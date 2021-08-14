@@ -1,0 +1,5 @@
+- Tendo dois grafos
+    - Iniciar interação em cima de cada vértice de um dos dois.
+        - Criar multiset 1
+
+        - Criar multiset 2
