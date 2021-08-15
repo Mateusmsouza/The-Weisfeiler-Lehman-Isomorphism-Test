@@ -1,5 +1,11 @@
 - Tendo dois grafos
     - Iniciar interação em cima de cada vértice de um dos dois.
         - Criar multiset 1
-
         - Criar multiset 2
+
+        - Comparar multiset de todos os nodes de ambos grafos (Pular a primeira iteração pois as labels serão inicializados em 1):
+            - Se forem iguais:
+                - Os grafos podem ser isomorficos
+            - Se não:
+                - Recolorir os vértices com os hashs baseados na tupla de vizinhos
+                - Continuar a iteração
