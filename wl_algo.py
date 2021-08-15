@@ -9,8 +9,11 @@ def run_wl(graph_one: Graph, graph_two: Graph) -> bool:
 
     Returns:
         bool: maybe these graphics are isomorphic
-    """    
+    """
     
+    if graph_one.vcount() != graph_two.vcount():
+        return False
+
     __set_all_as_one(graph_one)
     __set_all_as_one(graph_two)
     
