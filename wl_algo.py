@@ -1,4 +1,5 @@
 from igraph import *
+from sklearn.metrics import normalized_mutual_info_score
 
 def run_wl(graph_one: Graph, graph_two: Graph) -> bool:
     """ run wl algo
@@ -16,9 +17,7 @@ def run_wl(graph_one: Graph, graph_two: Graph) -> bool:
 
     __set_all_as_one(graph_one)
     __set_all_as_one(graph_two)
-    
-    recently_setted_as_one = True
-    
+        
     graph_one_vs_count = graph_one.vcount()
 
     for i in range(graph_one_vs_count):
@@ -41,13 +40,13 @@ def run_wl(graph_one: Graph, graph_two: Graph) -> bool:
 
         multiset_one, multiset_two = __gather_multisets(graph_one, graph_two)
 
-        if multiset_one == multiset_two and not recently_setted_as_one:
-            return True
+        if normalized_mutual_info_score(multiset_one, multiset_two) != 1.0:
+            return False
+
         __recolor_vertex(graph_one)
         __recolor_vertex(graph_two)
-        recently_setted_as_one = False
 
-    return False
+    return True
             
         
 def __gather_multisets(graph_one: Graph, graph_two: Graph) -> (list, list):
@@ -69,8 +68,8 @@ def __gather_multisets(graph_one: Graph, graph_two: Graph) -> (list, list):
         node_one = graph_one.vs[i]
         node_two = graph_two.vs[i]
 
-        multiset_list_one.append(node_one['metadata']['multiset'])
-        multiset_list_two.append(node_two['metadata']['multiset'])
+        multiset_list_one.append(*node_one['metadata']['multiset'])
+        multiset_list_two.append(*node_two['metadata']['multiset'])
 
     return sorted(multiset_list_one), sorted(multiset_list_two)
 
