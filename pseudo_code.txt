@@ -3,9 +3,10 @@
         - Criar multiset 1
         - Criar multiset 2
 
-        - Comparar multiset de todos os nodes de ambos grafos (Pular a primeira iteração pois as labels serão inicializados em 1):
+        - Comparar multiset de todos os nodes de ambos grafos:
             - Se forem iguais:
                 - Os grafos podem ser isomorficos
-            - Se não:
+                - Continuar iteração
                 - Recolorir os vértices com os hashs baseados na tupla de vizinhos
-                - Continuar a iteração
+            - Se não:
+                - Pausar iteração
