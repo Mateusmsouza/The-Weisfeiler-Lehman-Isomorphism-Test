@@ -1,3 +1,4 @@
+from typing import Union
 from igraph import *
 from sklearn.metrics import normalized_mutual_info_score
 
@@ -49,7 +50,7 @@ def run_wl(graph_one: Graph, graph_two: Graph) -> bool:
     return True
             
         
-def __gather_multisets(graph_one: Graph, graph_two: Graph) -> (list, list):
+def __gather_multisets(graph_one: Graph, graph_two: Graph) -> Union[list, list]:
     """Gather all vertex multisets in a graph in a list for comparision
     purposes.
     
@@ -60,7 +61,6 @@ def __gather_multisets(graph_one: Graph, graph_two: Graph) -> (list, list):
     Returns:
         (list, list): sorted multiset list from graph one and sorted multiset list from graph two
     """
-
     multiset_list_one = []
     multiset_list_two = []
 
@@ -68,8 +68,9 @@ def __gather_multisets(graph_one: Graph, graph_two: Graph) -> (list, list):
         node_one = graph_one.vs[i]
         node_two = graph_two.vs[i]
 
-        multiset_list_one.append(*node_one['metadata']['multiset'])
-        multiset_list_two.append(*node_two['metadata']['multiset'])
+        for i in range(len(node_one['metadata']['multiset'])):
+            multiset_list_one.append(node_one['metadata']['multiset'][i])
+            multiset_list_two.append(node_two['metadata']['multiset'][i])
 
     return sorted(multiset_list_one), sorted(multiset_list_two)
 

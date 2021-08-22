@@ -1,24 +1,10 @@
-from service_graph import ServiceGraph
 from wl_algo import run_wl
+from service_graph import ServiceGraph
+from data.graphs import ISOMORPHIC_GRAPHS, NOT_ISOMORPHIC_GRAPHS_THAT_PASSES_WL
 
 def main():
     service_graph = ServiceGraph()
-    
-    graph_one = service_graph.create(
-        vertex_amount=4,
-        edges=[
-            [0,1],
-            [3,2]
-        ]
-    )
-    
-    graph_two = service_graph.create(
-        vertex_amount=4,
-        edges=[
-            [3,2],
-            [0,1]
-        ]
-    )
+    graph_one, graph_two = ISOMORPHIC_GRAPHS[0], ISOMORPHIC_GRAPHS[1]
     
     seems_isomorphic = run_wl(graph_one, graph_two)
     if seems_isomorphic:
